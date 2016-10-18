@@ -9,7 +9,6 @@ RUN yaourt -Syy ; \
     python-scipy python-numpy python-virtualenv \
     fftw clfft 
 
-RUN yaourt -S --noconfirm --aur opencl-mesa
 #RUN yaourt -S --noconfirm --aur libopencl
 
 RUN git clone https://github.com/geggo/gpyfft.git
@@ -18,8 +17,11 @@ WORKDIR /home/build/gpyfft
 
 RUN sudo python setup.py install
 
+RUN yaourt -S --noconfirm --aur opencl-mesa clinfo
+
 VOLUME /home/build/program
 
 WORKDIR /home/build/program
 
 #ENTRYPOINT python
+ENTRYPOINT clinfo
